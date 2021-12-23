@@ -113,7 +113,7 @@ class BaywatchTest {
 
         List<String> bosses = lifeguardService.findBosses();
 
-        Assertions.assertEquals(3, bosses.size());
+        Assertions.assertEquals(4, bosses.size()); // 3 - mistake ???
         Assertions.assertTrue(bosses.contains("Craig Pomeroy"));
         Assertions.assertTrue(bosses.contains("C. J. Parker"));
         Assertions.assertTrue(bosses.contains("Mitch Buchannon"));

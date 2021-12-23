@@ -15,7 +15,7 @@ public interface BeachRepository extends JpaRepository<Beach, Long> {
     @Query(value = "SELECT b.name FROM beach b\n" +
                            "LEFT JOIN lifeguard l on b.id = l.beach_id\n" +
                            "GROUP BY b.id\n" +
-                           "having count(l.id) <= ?", nativeQuery = true)
+                           "having count(l.id) <= ? AND count(l.id)>0", nativeQuery = true)
     List<String> findAllBeachesWithLifeguardsLessThan(Integer n);
 
     //TODO Correct the query
