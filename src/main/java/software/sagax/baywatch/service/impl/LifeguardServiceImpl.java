@@ -1,14 +1,14 @@
 package software.sagax.baywatch.service.impl;
 
 import org.springframework.stereotype.Service;
+import software.sagax.baywatch.dto.SpeedNameDTO;
 import software.sagax.baywatch.model.Beach;
 import software.sagax.baywatch.model.Lifeguard;
 import software.sagax.baywatch.repository.LifeguardRepository;
 import software.sagax.baywatch.service.LifeguardService;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -96,19 +96,91 @@ public class LifeguardServiceImpl implements LifeguardService {
         //TODO
         //Implement grouping and count lifeguards by speed.
 
-        Map<Integer, Long> groupedBySpeed = lifeguardRepository.findAll().stream()
-                .collect(Collectors.groupingBy(
-                            Lifeguard::getSpeed,
-                            Collectors.counting()
-                            //Collectors.mapping(Lifeguard::getName, Collectors.toSet())) // names only
-                        )
-                );
+//        Map<Integer, Long> groupedBySpeed = lifeguardRepository.findAll().stream()
+//                .collect(Collectors.groupingBy(
+//                            Lifeguard::getSpeed,
+//                            Collectors.counting()
+//                            //Collectors.mapping(Lifeguard::getName, Collectors.toSet())) // names only
+//                        )
+//                );
 
         // Way 2. No Streams.
 //        List<int[]> list = lifeguardRepository.groupAndCountBySpeed();
 //        Map<Integer, Long> groupedBySpeed = list.stream().collect(Collectors.toMap(e -> e[0], e -> Long.valueOf(e[1])));
 
+        List<int[]> list = lifeguardRepository.groupAndCountBySpeed();
+        Map<Integer, Long> groupedBySpeed = list.stream().collect(Collectors.toMap(e -> e[0], e -> Long.valueOf(e[1])));
+
         return groupedBySpeed;
     }
+
+
+    //@Override
+    public Map<Integer, String> namesAndSpeeds() {
+        List<SpeedNameDTO> list = lifeguardRepository.namesAndSpeeds();
+        Map<Integer, List<String>> map = list.stream()
+                .collect(Collectors.toMap(e -> e.getSpeed(),
+                                        e -> List.of(e.getName()),
+                                        (e1, e2) -> {
+                                            ArrayList<String> list2 = new ArrayList(e1);
+                                            list2.addAll(e2);
+                                            return list2;
+                                        }));
+        return null;
+
+        return lifeguards.stream()
+                .collect(Collectors.toMap(
+                        Lifeguard::getSpeed,
+                        v -> 1L,
+                        (existing, replacement) -> existing + 1));
+
+
+
+        Collection;
+            Collections.SynchronizedCollection;
+            Collections.UnmodifiableCollection;
+            Collections.CheckedCollection;
+            List;
+            Queue;
+                Collections.CheckedQueue;
+                xxxCollections.SynchronizedQueue;
+                xxxCollections.UnmodifiableQueue;
+                ConcurrentLinkedQueue;
+                BlockingQueue;
+                Deque;
+
+            Set;
+                AbstractSet;
+                HashSet;
+                Collections.CheckedSet;
+                Collections.SynchronizedSet;
+                Collections.UnmodifiableSet;
+
+                SortedSet;
+                    Collections.CheckedSortedSet;
+                    Collections.SynchronizedSortedSet;
+                    Collections.UnmodifiableSortedSet;
+
+                    NavigableSet;
+                        TreeSet;
+                        Collections.CheckedNavigableSet;
+                        Collections.SynchronizedNavigableSet;
+                        Collections.UnmodifiableNavigableSet;
+                        ConcurrentSkipListSet;
+
+        Map;
+            WeakHashMap;
+            HashMap;
+                LinkedHashMap;
+            ConcurrentMap;
+                ConcurrentNavigableMap
+                ConcurrentHashMap;
+
+    }
+
+    SELECT DISTINCT l.name " +
+                                   "from lifeguard l " +
+                                   "right join lifeguard r ON l.id = r.boss_id " +
+                                   "where l.name is not null
 
 }

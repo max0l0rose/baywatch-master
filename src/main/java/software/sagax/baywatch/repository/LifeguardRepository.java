@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import software.sagax.baywatch.dto.SpeedNameDTO;
 import software.sagax.baywatch.model.Lifeguard;
 
 import java.util.List;
@@ -51,4 +52,9 @@ public interface LifeguardRepository extends JpaRepository<Lifeguard, Long> {
     @Transactional
     @Query("select l.speed, count(l) from Lifeguard l GROUP BY l.speed")
     List<int[]> groupAndCountBySpeed();
+
+    @Transactional
+    @Query("select new software.sagax.baywatch.dto.SpeedNameDTO(l.speed, l.name) " +
+                   "from Lifeguard l order by l.speed")
+    List<SpeedNameDTO> namesAndSpeeds();
 }

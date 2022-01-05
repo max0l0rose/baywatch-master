@@ -134,6 +134,16 @@ class BaywatchTest {
     }
 
 
+
+    @Test
+    //@Order(7)
+    void namesAndSpeeds() {
+        Map<Integer, String> namesAndSpeeds = lifeguardService.namesAndSpeeds();
+        Assertions.assertEquals(5, namesAndSpeeds.size());
+    }
+
+
+
     @Test
     @Order(8)
     void fireLifeguard() {

@@ -26,5 +26,6 @@ public interface LifeguardService {
     void changeSpeed(String name, Integer speed);
 
     Map<Integer, Long> groupAndCountBySpeed();
+    Map<Integer, String> namesAndSpeeds();
 
 }
