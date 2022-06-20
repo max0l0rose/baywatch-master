@@ -5,10 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import software.sagax.baywatch.model.Beach;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
 public interface BeachRepository extends JpaRepository<Beach, Long> {
+
 
     //TODO Correct the query
     //Get a list of the names of the beaches where the number of lifeguards does not exceed N people

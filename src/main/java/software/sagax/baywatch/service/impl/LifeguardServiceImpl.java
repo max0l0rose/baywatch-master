@@ -128,59 +128,17 @@ public class LifeguardServiceImpl implements LifeguardService {
                                         }));
         return null;
 
-        return lifeguards.stream()
-                .collect(Collectors.toMap(
-                        Lifeguard::getSpeed,
-                        v -> 1L,
-                        (existing, replacement) -> existing + 1));
-
-
-
-        Collection;
-            Collections.SynchronizedCollection;
-            Collections.UnmodifiableCollection;
-            Collections.CheckedCollection;
-            List;
-            Queue;
-                Collections.CheckedQueue;
-                xxxCollections.SynchronizedQueue;
-                xxxCollections.UnmodifiableQueue;
-                ConcurrentLinkedQueue;
-                BlockingQueue;
-                Deque;
-
-            Set;
-                AbstractSet;
-                HashSet;
-                Collections.CheckedSet;
-                Collections.SynchronizedSet;
-                Collections.UnmodifiableSet;
-
-                SortedSet;
-                    Collections.CheckedSortedSet;
-                    Collections.SynchronizedSortedSet;
-                    Collections.UnmodifiableSortedSet;
-
-                    NavigableSet;
-                        TreeSet;
-                        Collections.CheckedNavigableSet;
-                        Collections.SynchronizedNavigableSet;
-                        Collections.UnmodifiableNavigableSet;
-                        ConcurrentSkipListSet;
-
-        Map;
-            WeakHashMap;
-            HashMap;
-                LinkedHashMap;
-            ConcurrentMap;
-                ConcurrentNavigableMap
-                ConcurrentHashMap;
+//        return lifeguards.stream()
+//                .collect(Collectors.toMap(
+//                        Lifeguard::getSpeed,
+//                        v -> 1L,
+//                        (existing, replacement) -> existing + 1));
 
     }
 
-    SELECT DISTINCT l.name " +
-                                   "from lifeguard l " +
-                                   "right join lifeguard r ON l.id = r.boss_id " +
-                                   "where l.name is not null
+//    SELECT DISTINCT l.name " +
+//                                   "from lifeguard l " +
+//                                   "right join lifeguard r ON l.id = r.boss_id " +
+//                                   "where l.name is not null
 
 }
